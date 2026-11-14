@@ -214,12 +214,12 @@ bool handleAnimsTouch(int x, int y) {
     }
     if (x >= BRIGHT_MINUS_X - 4 && x < BRIGHT_MINUS_X + BRIGHT_BUTTON_W + 4) {
       if (brightnessIndex > 0) brightnessIndex--;
-      sendCommand(MESSAGE_TYPE_BRIGHTNESS, BRIGHTNESS_LEVELS[brightnessIndex]);
+      sendBrightness(BRIGHTNESS_LEVELS[brightnessIndex]);
       return true;
     }
     if (x >= BRIGHT_PLUS_X - 4 && x < BRIGHT_PLUS_X + BRIGHT_BUTTON_W + 4) {
       if (brightnessIndex < BRIGHTNESS_LEVEL_COUNT - 1) brightnessIndex++;
-      sendCommand(MESSAGE_TYPE_BRIGHTNESS, BRIGHTNESS_LEVELS[brightnessIndex]);
+      sendBrightness(BRIGHTNESS_LEVELS[brightnessIndex]);
       return true;
     }
   }

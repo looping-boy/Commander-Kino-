@@ -1,6 +1,6 @@
 # Commander-Kino
 
-Télécommande tactile LilyGo T-Display S3 pour la veste LED (prototype 2, style veste de baseball), version Kino.
+Télécommande tactile LilyGo T-Display S3 pour les manteaux LED, version Kino. Elle pilote la veste proto 2 (style veste de baseball) et le manteau V1 (proto 1).
 
 ![Aperçu des deux écrans](docs/apercu-ecrans.png)
 
@@ -13,9 +13,9 @@ Télécommande tactile LilyGo T-Display S3 pour la veste LED (prototype 2, style
 Les animations habituelles de la veste :
 - **Ligne 1** : les arcs-en-ciel et les animations multicolores (vertical, horizontal, diagonal, circulaire, pluie, étincelles, fondu, pulsation).
 - **Ligne 2** : les animations d'une seule teinte (plein, pulsation, lignes, cercle, croix).
-- **Ligne 3** : la barre de couleur règle la teinte de la ligne 2. Les boutons `-` et `+` règlent la luminosité de la veste (10 à 255, elle démarre à 100).
+- **Ligne 3** : la barre de couleur règle la teinte de la ligne 2. Les boutons `-` et `+` règlent la luminosité (10 à 255). La veste proto 2 démarre à 100. Sur le manteau V1, c'est la molette qui règle la luminosité, jusqu'au premier appui sur `-` ou `+` : ensuite, c'est la télécommande, jusqu'au redémarrage du manteau.
 
-Les animations GIF du firmware (16 à 21) ne sont pas codées dans la veste : elles ne sont pas proposées.
+Les animations GIF du firmware (16 à 21) ne sont pas codées dans la veste proto 2 : elles ne sont pas proposées.
 
 ### KINO
 
@@ -39,21 +39,26 @@ Le message est envoyé 4 fois, à 60 ms d'intervalle, parce que la veste partage
 | Message ESP-NOW | Type | Valeur |
 |---|---|---|
 | Luminosité | `0` | 0 à 255 |
+| Ignorer la molette (manteau V1) | `5` | `1` |
 | Teinte | `1` | 0 à 255 (0 rouge, 64 jaune, 160 bleu) |
 | Animation | `3` | numéro d'animation |
 | Roulette | `11` | couleur de départ (0 rouge, 1 jaune, 2 bleu) + 3 × numéro de répétition (0 à 3) |
 
-La logique de la roulette (`CommanderKino/RouletteLogic.h`) est une copie exacte de celle de la veste. Si tu changes un réglage, change-le des deux côtés, puis lance :
+La logique de la roulette (`CommanderKino/RouletteLogic.h`) est une copie exacte de celle des manteaux. Si tu changes un réglage, change-le partout, puis lance :
 
 ```bash
 test/check_sync.sh "/Users/guillaumelotis/Documents/Code/Arduino/Led Coat"
 ```
 
-## Il faut aussi flasher la veste
+```bash
+test/check_sync.sh ~/Documents/Code/Arduino/LedVestProto1
+```
 
-La veste doit tourner avec le firmware **LedVestProto2**, branche `feat/roulette-kino`. Ce firmware écoute l'ESP-NOW en plus du Bluetooth, et connaît le message de roulette `11`.
+## Il faut aussi flasher le manteau
 
-Dans Arduino IDE, choisis **Outils > Partition Scheme > Minimal SPIFFS (1.9MB APP with OTA/190KB SPIFFS)**. Le mode d'emploi complet est dans `LedCoatAnim/ROULETTE.md`, dans le dépôt LedVestProto2.
+Le manteau doit connaître le message de roulette `11`. Les deux firmwares sont sur la branche `feat/roulette-kino` :
+- **Veste proto 2** : **LedVestProto2**. Ce firmware écoute l'ESP-NOW en plus du Bluetooth. Dans Arduino IDE, choisis **Outils > Partition Scheme > Minimal SPIFFS (1.9MB APP with OTA/190KB SPIFFS)**. Le mode d'emploi complet est dans `LedCoatAnim/ROULETTE.md`, dans ce dépôt.
+- **Manteau V1** : **LedVestProto1**. Il écoutait déjà l'ESP-NOW ; la roulette remplit ses 4 bandes, à la luminosité de la molette.
 
 ## Flasher la télécommande
 

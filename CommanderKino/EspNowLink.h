@@ -15,6 +15,7 @@
 const uint8_t MESSAGE_TYPE_BRIGHTNESS = 0;
 const uint8_t MESSAGE_TYPE_HUE = 1;
 const uint8_t MESSAGE_TYPE_PATTERN = 3;
+const uint8_t MESSAGE_TYPE_FORCE_BRIGHTNESS = 5;  // 1 = la télécommande prend la main sur la molette du manteau V1
 const uint8_t MESSAGE_TYPE_ROULETTE_FROM = 11;  // valeur = rouletteEncodeStart(départ, répétition)
 
 typedef struct Message {
@@ -54,6 +55,14 @@ void sendCommand(uint8_t type, uint8_t value) {
   sendMessage(type, value);
   delay(25);
   sendMessage(type, value);
+}
+
+// Luminosité : le manteau V1 lit sa molette à chaque tour et écraserait la
+// valeur reçue. On lui dit d'abord d'ignorer la molette (jusqu'à son
+// redémarrage). La veste proto 2 n'a pas de molette et ignore ce message.
+void sendBrightness(uint8_t level) {
+  sendCommand(MESSAGE_TYPE_FORCE_BRIGHTNESS, 1);
+  sendCommand(MESSAGE_TYPE_BRIGHTNESS, level);
 }
 
 // ----- Lancement de la roulette, sans bloquer l'animation de l'écran -----
