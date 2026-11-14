@@ -1,4 +1,4 @@
-# LedVestCommanderKino
+# Commander-Kino
 
 Télécommande tactile LilyGo T-Display S3 pour la veste LED (prototype 2, style veste de baseball), version Kino.
 
