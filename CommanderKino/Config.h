@@ -48,7 +48,10 @@ static const uint16_t ROULETTE_SCREEN_COLORS[3] = {
 static const uint16_t ROULETTE_TEXT_COLORS[3] = {0xFFFF, 0x0000, 0xFFFF};  // blanc, noir, blanc
 
 // Luminosités proposées sur l'écran ANIMS (la veste démarre à 100).
-static const uint8_t BRIGHTNESS_LEVELS[] = {10, 25, 50, 75, 100, 150, 200, 255};
+// Plafond à 150 : au-delà, surtout en blanc, le BMS de la batterie coupe le manteau
+// (200 passait, mais trop juste).
+#define BRIGHTNESS_MAX 150
+static const uint8_t BRIGHTNESS_LEVELS[] = {10, 25, 50, 75, 100, 125, BRIGHTNESS_MAX};
 #define BRIGHTNESS_LEVEL_COUNT (sizeof(BRIGHTNESS_LEVELS) / sizeof(BRIGHTNESS_LEVELS[0]))
 #define BRIGHTNESS_START_INDEX 4
 

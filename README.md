@@ -13,7 +13,7 @@ Télécommande tactile LilyGo T-Display S3 pour les manteaux LED, version Kino. 
 Les animations habituelles de la veste :
 - **Ligne 1** : les arcs-en-ciel et les animations multicolores (vertical, horizontal, diagonal, circulaire, pluie, étincelles, fondu, pulsation).
 - **Ligne 2** : les animations d'une seule teinte (plein, pulsation, lignes, cercle, croix).
-- **Ligne 3** : la barre de couleur règle la teinte de la ligne 2. Les boutons `-` et `+` règlent la luminosité (10 à 255). La veste proto 2 démarre à 100. Sur le manteau V1, c'est la molette qui règle la luminosité, jusqu'au premier appui sur `-` ou `+` : ensuite, c'est la télécommande, jusqu'au redémarrage du manteau.
+- **Ligne 3** : la barre de couleur règle la teinte de la ligne 2. Les boutons `-` et `+` règlent la luminosité, de 10 à 150 au maximum : au-delà, surtout en blanc, le BMS de la batterie coupe le manteau. La veste proto 2 démarre à 100. Sur le manteau V1, c'est la molette qui règle la luminosité, jusqu'au premier appui sur `-` ou `+` : ensuite, c'est la télécommande, jusqu'au redémarrage du manteau.
 
 Les animations GIF du firmware (16 à 21) ne sont pas codées dans la veste proto 2 : elles ne sont pas proposées.
 
